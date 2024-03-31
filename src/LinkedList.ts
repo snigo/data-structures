@@ -51,12 +51,14 @@ export class LinkedList<Value> {
   contains(value: Value) {
     let node = this.head;
     if (!node) return false;
-    if (!node.next) return Object.is(node.value, value);
+    if (!node.next || node.next === this.head) {
+      return Object.is(node.value, value);
+    }
     while (node.next) {
       if (Object.is(node.next.value, value)) {
         return true;
       }
-      if (node.next === this.head) {
+      if (node.next === this.tail) {
         return false;
       }
       node = node.next;
@@ -65,21 +67,21 @@ export class LinkedList<Value> {
   }
 
   getHead() {
-    return this.head;
+    return this.head?.value;
   }
 
   getTail() {
-    return this.tail;
+    return this.tail?.value;
   }
 
   isCircular() {
-    let node = this.head;
-    if (!node || !node.next) return false;
-    while (node) {
-      if (node.next === this.head) {
-        return true;
-      }
-      node = node.next;
+    if (this.isEmpty()) return false;
+    let slow = this.head;
+    let fast = this.head;
+    while (fast && fast.next) {
+      slow = slow!.next;
+      fast = fast.next.next;
+      if (slow === fast) return true;
     }
     return false;
   }
@@ -91,7 +93,7 @@ export class LinkedList<Value> {
   remove(value: Value) {
     let node = this.head;
     if (!node) return false;
-    if (!node.next) {
+    if (!node.next || node.next === this.head) {
       if (Object.is(node.value, value)) {
         this.clear();
         return true;
@@ -101,10 +103,13 @@ export class LinkedList<Value> {
     while (node.next) {
       if (Object.is(node.next.value, value)) {
         const removed = node.next;
-        node.setNext(removed.next ?? null);
+        node.setNext(removed.next);
+        if (this.tail === removed) {
+          this.tail = node;
+        }
         return true;
       }
-      if (node.next === this.head) {
+      if (node.next === this.tail) {
         return false;
       }
       node = node.next;
@@ -114,21 +119,26 @@ export class LinkedList<Value> {
 
   removeHead() {
     const removed = this.head;
-    this.head = removed?.next ?? null;
+    if (!removed?.next) {
+      this.clear();
+    } else {
+      this.head = removed.next;
+    }
     return removed?.value;
   }
 
   removeTail() {
     let node = this.head;
     if (!node) return undefined;
-    if (!node.next) {
+    if (!node.next || node.next === this.head) {
       this.clear();
       return node.value;
     }
     while (node.next) {
-      if (!node.next.next || node.next.next === this.head) {
+      if (node.next === this.tail) {
         const removed = node.next;
         node.setNext(removed.next);
+        this.tail = node;
         return removed.value;
       }
       node = node.next;
@@ -141,6 +151,7 @@ export class LinkedList<Value> {
     let node = this.head;
     while (node) {
       count++;
+      if (node === this.tail) break;
       node = node.next;
     }
     return count;
