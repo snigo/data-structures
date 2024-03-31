@@ -1,7 +1,1 @@
-export class LinkedList {
-  head: number;
-
-  constructor() {
-    this.head = 42;
-  }
-}
+export * from './LinkedList.js';
