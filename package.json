@@ -9,6 +9,8 @@
   "scripts": {
     "build": "rimraf dist && tsup",
     "format": "prettier --write src",
+    "lint": "tsc --noEmit && eslint --ext .ts src",
+    "lint:fix": "tsc --noEmit && eslint --ext .ts src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "publishConfig": {
@@ -34,7 +36,9 @@
   "author": "Igor Snitkin <sudo@snigo.dev>",
   "license": "MIT",
   "devDependencies": {
+    "@gigwork/eslint-config-service": "^0.1.3",
     "@types/node": "^20.12.2",
+    "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
     "tslib": "^2.6.2",
