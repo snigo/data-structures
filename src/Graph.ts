@@ -96,7 +96,7 @@ export class Graph<N> {
     while (!queue.isEmpty()) {
       const currentNode = queue.dequeue()!;
       cb(currentNode, this);
-      this.getAdjacentNodes(node)?.forEach(neighbor => {
+      this.getAdjacentNodes(currentNode)?.forEach(neighbor => {
         if (!visited.has(neighbor)) {
           visited.add(neighbor);
           queue.enqueue(neighbor);
