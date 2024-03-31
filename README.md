@@ -1,2 +1,2 @@
-# data-structures
-Basic Data Structures in TypeScript
+# Basic Data Structures in TypeScript
+

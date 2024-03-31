@@ -1,0 +1,34 @@
+{
+  "name": "@gigwork/ds",
+  "version": "0.1.0",
+  "description": "Basic Data Structures in TypeScript",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "keywords": [
+    "data-structures",
+    "linked-list",
+    "queue",
+    "stack",
+    "graph",
+    "bloom-filter",
+    "binary-tree",
+    "b-tree",
+    "trie",
+    "red-black-tree",
+    "disjoint-set",
+    "heaps",
+    "algorithms",
+    "data-storage",
+    "coding-tools"
+  ],
+  "author": "Igor Snitkin <sudo@snigo.dev>",
+  "license": "MIT"
+}
