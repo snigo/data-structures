@@ -47,9 +47,9 @@ describe('LinkedList static from method', () => {
     ]);
     const list = LinkedList.from(map);
 
-    assert.strictEqual(list.head?.value, 1);
-    assert.strictEqual(list.head?.next?.value, 2);
-    assert.strictEqual(list.tail?.value, 3);
+    assert.deepStrictEqual(list.head?.value, ['a', 1]);
+    assert.deepStrictEqual(list.head?.next?.value, ['b', 2]);
+    assert.deepStrictEqual(list.tail?.value, ['c', 3]);
   });
 
   it('accounts for empty iterables', () => {

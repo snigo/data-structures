@@ -1,4 +1,3 @@
-import type { Iterable } from './utils/types.js';
 import { LinkedNode } from './LinkedNode.js';
 
 export class LinkedList<Value> {
@@ -15,7 +14,7 @@ export class LinkedList<Value> {
 
   static from<V>(iterable: Iterable<V>) {
     const list = new LinkedList<V>();
-    for (const value of iterable.values()) {
+    for (const value of iterable) {
       list.addTail(value);
     }
     return list;
