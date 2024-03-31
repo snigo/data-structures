@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@gigwork/eslint-config-service':
-    specifier: ^0.1.3
-    version: 0.1.3(eslint@8.57.0)(typescript@5.4.3)
+    specifier: ^0.1.4
+    version: 0.1.4(eslint@8.57.0)(typescript@5.4.3)
   '@types/node':
     specifier: ^20.12.2
     version: 20.12.2
@@ -293,8 +293,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@gigwork/eslint-config-service@0.1.3(eslint@8.57.0)(typescript@5.4.3):
-    resolution: {integrity: sha512-bEXK3J+yfU7rjPWkUfwxjM1SB5fNiNZpAWRxN3Gsp7kQ0FH3rhqNSAJihbpCZDOYwNbnVIxxWOQ+rAshdLP4NQ==}
+  /@gigwork/eslint-config-service@0.1.4(eslint@8.57.0)(typescript@5.4.3):
+    resolution: {integrity: sha512-G5VqWF+QF6hd2xUKWsWbROo+RiHTbduTcv78CwyeyvX6GAQwY4OUQT3Qgbx2j15PJpBQ+eCeBtbERYoBZo2+Yg==}
     peerDependencies:
       eslint: '>= 8'
     dependencies:

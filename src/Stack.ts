@@ -8,6 +8,14 @@ export class Stack<Value> extends Array<Value> {
     }
   }
 
+  static override from<V>(arrayLike: ArrayLike<V> | Iterable<V>) {
+    return new Stack(Array.from(arrayLike));
+  }
+
+  clear() {
+    this.length = 0;
+  }
+
   isEmpty() {
     return !this.length;
   }
