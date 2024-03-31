@@ -4,10 +4,24 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  fnv-plus:
+    specifier: ^1.3.1
+    version: 1.3.1
+  imurmurhash:
+    specifier: ^0.1.4
+    version: 0.1.4
+
 devDependencies:
   '@gigwork/eslint-config-service':
     specifier: ^0.1.4
     version: 0.1.4(eslint@8.57.0)(typescript@5.4.3)
+  '@types/fnv-plus':
+    specifier: ^1.3.2
+    version: 1.3.2
+  '@types/imurmurhash':
+    specifier: ^0.1.4
+    version: 0.1.4
   '@types/node':
     specifier: ^20.12.2
     version: 20.12.2
@@ -525,6 +539,14 @@ packages:
 
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
+    dev: true
+
+  /@types/fnv-plus@1.3.2:
+    resolution: {integrity: sha512-Bgr5yn2dph2q8HZKDS002Pob6vaRTRfhqN9E+TOhjKsJvnfZXULPR3ihH8dL5ZjgxbNhqhTn9hijpbAMPtKZzw==}
+    dev: true
+
+  /@types/imurmurhash@0.1.4:
+    resolution: {integrity: sha512-Zo/QlTiAvOP3pd9nuPOw33k0l/QssLOBrriShWzUE4qhIZByIF3rCoyF8ZTxdyFTUM2mYljYLqMUeLvA3NJUmQ==}
     dev: true
 
   /@types/json-schema@7.0.15:
@@ -1573,6 +1595,10 @@ packages:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
     dev: true
 
+  /fnv-plus@1.3.1:
+    resolution: {integrity: sha512-Gz1EvfOneuFfk4yG458dJ3TLJ7gV19q3OM/vVvvHf7eT02Hm1DleB4edsia6ahbKgAYxO9gvyQ1ioWZR+a00Yw==}
+    dev: false
+
   /for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -1806,7 +1832,6 @@ packages:
   /imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
-    dev: true
 
   /inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
