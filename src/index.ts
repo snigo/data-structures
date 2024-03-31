@@ -1,2 +1,7 @@
-// eslint-disable-next-line no-console
-console.log('Hello, Data Structures!');
+export class LinkedList {
+  head: number;
+
+  constructor() {
+    this.head = 42;
+  }
+}
