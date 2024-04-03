@@ -39,10 +39,10 @@ export function searchNode<Value>(
   return true;
 }
 
-function findMin<Value>(root: BinaryNode<Value>) {
+function findMax<Value>(root: BinaryNode<Value>) {
   let node = root;
-  while (node.left) {
-    node = node.left;
+  while (node.right) {
+    node = node.right;
   }
   return node;
 }
@@ -65,7 +65,7 @@ export function deleteNode<Value>(
   }
   if (!root.left) return root.right;
   if (!root.right) return root.left;
-  const deepestLeft = findMin(root.left);
+  const deepestLeft = findMax(root.left);
   root.setValue(deepestLeft.value);
   root.left = deleteNode(root.left, deepestLeft);
   return root;
