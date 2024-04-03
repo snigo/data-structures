@@ -65,9 +65,9 @@ export function deleteNode<Value>(
   }
   if (!root.left) return root.right;
   if (!root.right) return root.left;
-  const deepestLeft = findMax(root.left);
-  root.setValue(deepestLeft.value);
-  root.left = deleteNode(root.left, deepestLeft);
+  const deepestRight = findMax(root.left);
+  root.setValue(deepestRight.value);
+  root.left = deleteNode(root.left, deepestRight);
   return root;
 }
 
