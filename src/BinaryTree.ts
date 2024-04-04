@@ -18,6 +18,14 @@ export class BinaryTree<Value> {
     }
   }
 
+  static from<V>(values: Iterable<V>) {
+    const tree = new BinaryTree<V>();
+    for (const value of values) {
+      tree.add(value);
+    }
+    return tree;
+  }
+
   add(value: Value) {
     const node = new BinaryNode(value);
     if (this.isEmpty()) {
@@ -59,5 +67,13 @@ export class BinaryTree<Value> {
 
   forEachPostOrder(cb: BinaryTreeCallbackFn<Value>) {
     traversePostOrder(this.root, this, cb);
+  }
+
+  toSortedArray() {
+    const result: Value[] = [];
+    this.forEachInOrder(value => {
+      result.push(value);
+    });
+    return result;
   }
 }
