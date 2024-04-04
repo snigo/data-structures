@@ -57,6 +57,11 @@ export class BinaryTree<Value> {
     return Math.max(leftHeight, rightHeight) + 1;
   }
 
+  size(node = this.root): number {
+    if (!node) return 0;
+    return this.size(node.left) + this.size(node.right) + 1;
+  }
+
   forEachInOrder(cb: BinaryTreeCallbackFn<Value>) {
     traverseInOrder(this.root, this, cb);
   }
