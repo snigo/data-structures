@@ -42,6 +42,14 @@ export class BinaryNode<Value> {
     return Object.is(this.value, node.value);
   }
 
+  getValue() {
+    return this.value;
+  }
+
+  getKey() {
+    return this.key;
+  }
+
   setValue(value: Value) {
     this.key = stringify(value);
     this.value = value;

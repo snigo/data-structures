@@ -17,6 +17,10 @@ export function stringify(value: unknown): string {
     return value.toString();
   }
 
+  if (typeof value === 'function') {
+    return `Function(${value.toString().replace(/\s+/g, '')})`;
+  }
+
   if (Array.isArray(value)) {
     return `[${value.map(item => stringify(item)).join(',')}]`;
   }
