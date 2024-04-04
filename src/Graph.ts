@@ -1,22 +1,5 @@
+import { dfs, type GraphTraversalCallback } from './utils/graph.js';
 import { Queue } from './Queue.js';
-
-type GraphTraversalCallback<N> = (node: N, graph?: Graph<N>) => void;
-
-function dfs<N>(
-  node: N,
-  graph: Graph<N>,
-  cb: GraphTraversalCallback<N>,
-  visited: Set<N> = new Set(),
-) {
-  if (!graph.has(node) || visited.has(node)) return;
-  cb(node, graph);
-  visited.add(node);
-  graph.getAdjacentNodes(node)!.forEach(neighbor => {
-    if (!visited.has(neighbor)) {
-      dfs(neighbor, graph, cb, visited);
-    }
-  });
-}
 
 export class Graph<N> {
   private nodes = new Map<N, Set<N>>();
