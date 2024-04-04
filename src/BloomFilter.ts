@@ -2,7 +2,8 @@
 import fnvPlus from 'fnv-plus';
 import MurmurHash3 from 'imurmurhash';
 
-import { clamp, type JSONValue } from './utils/bloomFilter.js';
+import { clamp } from './utils/bloomFilter.js';
+import { stringify } from './utils/stringify.js';
 
 const MIN_SIZE = 64;
 const DEFAULT_SIZE = 256;
@@ -10,7 +11,7 @@ const MAX_SIZE = 0xffffffff;
 const BITS = 32;
 const K = 2;
 
-export class BloomFilter<Value extends JSONValue> {
+export class BloomFilter<Value> {
   private bitArray: Uint32Array;
 
   bitSize: number;
@@ -25,13 +26,13 @@ export class BloomFilter<Value extends JSONValue> {
     this.bitSize = bitSize;
   }
 
-  static from<V extends JSONValue>(values: Iterable<V>) {
+  static from<V>(values: Iterable<V>) {
     const array = Array.from(values);
     return new BloomFilter(array.length).addAll(array);
   }
 
   add(value: Value) {
-    const stringValue = JSON.stringify(value);
+    const stringValue = stringify(value);
     const fnv = fnvPlus.fast1a32(stringValue) % this.bitSize;
     const fnvIndex = Math.floor(fnv / BITS);
     const fnvPosition = fnv % BITS;
@@ -51,7 +52,7 @@ export class BloomFilter<Value extends JSONValue> {
   }
 
   has(value: Value) {
-    const stringValue = JSON.stringify(value);
+    const stringValue = stringify(value);
     const fnv = fnvPlus.fast1a32(stringValue) % this.bitSize;
     const fnvIndex = Math.floor(fnv / BITS);
     const fnvPosition = fnv % BITS;
