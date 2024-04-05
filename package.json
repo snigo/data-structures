@@ -42,7 +42,7 @@
     "@types/fnv-plus": "^1.3.2",
     "@types/imurmurhash": "^0.1.4",
     "@types/node": "^20.12.2",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "glob": "^10.3.12",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
