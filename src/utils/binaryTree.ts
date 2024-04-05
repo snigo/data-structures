@@ -3,8 +3,8 @@ import type { BinaryTree } from 'src/BinaryTree.js';
 
 export type BinaryTreeCallbackFn<V> = (
   value: V,
-  node?: BinaryNode<V>,
-  tree?: BinaryTree<V>,
+  node: BinaryNode<V>,
+  tree: BinaryTree<V>,
 ) => void;
 
 export function insertNode<Value>(

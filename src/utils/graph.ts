@@ -1,6 +1,6 @@
 import type { Graph } from 'src/Graph.js';
 
-export type GraphTraversalCallback<N> = (node: N, graph?: Graph<N>) => void;
+export type GraphTraversalCallback<N> = (node: N, graph: Graph<N>) => void;
 
 export function dfs<N>(
   node: N,
