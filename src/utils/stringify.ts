@@ -38,6 +38,7 @@ export function stringify(value: unknown): string {
   }
 
   const sortedKeys = Object.keys(value).sort();
+  // eslint-disable-next-line @typescript-eslint/no-base-to-string
   const string = value.toString();
 
   if (!sortedKeys.length && !string.startsWith('[object')) {

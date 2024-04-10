@@ -21,7 +21,7 @@ export class Stack<Value> extends Array<Value> {
   }
 
   peek() {
-    return this.at(-1);
+    return this[this.length - 1];
   }
 
   size() {

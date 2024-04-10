@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default-member */
 import fnvPlus from 'fnv-plus';
 import MurmurHash3 from 'imurmurhash';
 
