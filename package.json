@@ -38,6 +38,7 @@
   "author": "Igor Snitkin <sudo@snigo.dev>",
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@types/fnv-plus": "^1.3.2",
     "@types/imurmurhash": "^0.1.4",
     "@types/node": "^20.12.2",
