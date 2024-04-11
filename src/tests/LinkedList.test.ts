@@ -199,4 +199,11 @@ describe('LinkedList prototype methods', () => {
     list.clear();
     assert.strictEqual(list.size(), 0);
   });
+
+  it('allows to iterate over LinkedList', () => {
+    const list = new LinkedList<number>();
+    list.addHead(1).addHead(2).addHead(3);
+    const array = Array.from(list);
+    assert.deepStrictEqual(array, [3, 2, 1]);
+  });
 });

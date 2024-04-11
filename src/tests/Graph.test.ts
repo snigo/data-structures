@@ -87,4 +87,19 @@ describe('Graph class', () => {
     });
     assert.deepStrictEqual(result, [1, 2, 4, 3, 5]);
   });
+
+  it('allows to iterate over adjacency list entries', () => {
+    const graph = new Graph<number>();
+    graph.addEdge(1, 2);
+    graph.addEdge(1, 3);
+    graph.addEdge(1, 4);
+    graph.addEdge(1, 5);
+    const iterator = graph.entries();
+    const value1 = iterator.next().value;
+    assert.strictEqual(value1[0], 1);
+    assert.strictEqual(value1[1].size, 4);
+    const value2 = iterator.next().value;
+    assert.strictEqual(value2[0], 2);
+    assert.strictEqual(value2[1].size, 0);
+  });
 });

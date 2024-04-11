@@ -69,12 +69,12 @@ export class Graph<N> {
   }
 
   forEachDFS(node: N, cb: GraphTraversalCallback<N>) {
-    dfs(node, this, cb);
+    dfs(this, node, cb);
   }
 
   forEachBFS(node: N, cb: GraphTraversalCallback<N>) {
     const queue = new Queue([node]);
-    const visited = new Set<N>([node]);
+    const visited = new Set([node]);
 
     while (!queue.isEmpty()) {
       const currentNode = queue.dequeue()!;
@@ -86,5 +86,9 @@ export class Graph<N> {
         }
       });
     }
+  }
+
+  entries() {
+    return this.nodes.entries();
   }
 }

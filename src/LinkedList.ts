@@ -1,3 +1,4 @@
+import { LinkedListIterator } from './utils/linkedList.js';
 import { LinkedNode } from './LinkedNode.js';
 
 export class LinkedList<Value> {
@@ -18,6 +19,10 @@ export class LinkedList<Value> {
       list.addTail(value);
     }
     return list;
+  }
+
+  [Symbol.iterator]() {
+    return new LinkedListIterator(this.head);
   }
 
   addHead(value: Value) {
