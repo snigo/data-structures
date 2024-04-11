@@ -59,6 +59,10 @@ export class Heap<V> extends Array<V> {
     return this.length;
   }
 
+  clear() {
+    this.length = 0;
+  }
+
   isEmpty() {
     return !this.length;
   }
