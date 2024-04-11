@@ -14,7 +14,8 @@ export class PriorityQueue<V> extends Heap<V> {
   }
 
   enqueue(...items: V[]) {
-    return this.push(...items);
+    this.push(...items);
+    return this;
   }
 
   dequeue() {
