@@ -1,10 +1,14 @@
-import { splitWords } from './utils/trie.js';
+import { WORDS_MATCH_RE } from './utils/trie.js';
 import { TrieNode } from './TrieNode.js';
 
 const ROOT_KEY = '*';
 
 export class Trie<V> {
   root = new TrieNode(null!, ROOT_KEY, undefined as V);
+
+  static split(words: string) {
+    return words.match(WORDS_MATCH_RE) ?? [];
+  }
 
   add(word: string, value: V) {
     let node = this.root;
@@ -18,7 +22,7 @@ export class Trie<V> {
   }
 
   addMany(words: string, value: V) {
-    splitWords(words).forEach(word => {
+    Trie.split(words).forEach(word => {
       this.add(word, value);
     });
     return this;
