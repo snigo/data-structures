@@ -5,12 +5,15 @@ export class TrieNode<V> {
 
   private __rv = new Set<V>();
 
+  parent: TrieNode<V>;
+
   children = new Map<string, TrieNode<V>>();
 
-  constructor(key: string, value: V, isLastIndex = false) {
+  constructor(parent: TrieNode<V>, key: string, value: V, isLastIndex = false) {
     if (key.length !== 1) {
       throw new TypeError('Key of TrieNode must be a single character');
     }
+    this.parent = parent;
     this.key = key;
     this.addValue(value, isLastIndex);
   }
@@ -22,7 +25,7 @@ export class TrieNode<V> {
   addChildNode(key: string, value: V, isLastIndex = false) {
     const childnode = this.getChildNode(key);
     if (!childnode) {
-      this.children.set(key, new TrieNode(key, value, isLastIndex));
+      this.children.set(key, new TrieNode(this, key, value, isLastIndex));
     } else {
       childnode.addValue(value, isLastIndex);
     }
@@ -70,6 +73,14 @@ export class TrieNode<V> {
 
   deleteValue(value: V) {
     return this.__lv.delete(value) || this.__rv.delete(value);
+  }
+
+  getLastIndexValues() {
+    return Array.from(this.__lv);
+  }
+
+  deleteLastIndexValues() {
+    return this.__lv.clear();
   }
 
   deleteNode(key: string) {
