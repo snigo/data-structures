@@ -4,7 +4,7 @@ import { TrieNode } from './TrieNode.js';
 const ROOT_KEY = '*';
 
 export class Trie<V> {
-  root = new TrieNode(null!, ROOT_KEY, undefined as V);
+  root = new TrieNode(null, ROOT_KEY, undefined as V);
 
   static split(words: string) {
     return words.match(WORDS_MATCH_RE) ?? [];
@@ -40,12 +40,12 @@ export class Trie<V> {
   delete(word: string) {
     let node = this.getLastNode(word);
     if (!node || !node.isLastIndex()) return false;
-    const values = node.getLastIndexValues();
-    node.deleteLastIndexValues();
+    const values = node.getWordValues();
+    node.clearWordValues();
     while (node.parent) {
       // eslint-disable-next-line no-loop-func
       values.forEach(value => {
-        node!.parent.deleteValue(value);
+        node!.parent!.deleteSubstringValue(value);
       });
       node = node.parent;
     }
