@@ -33,6 +33,13 @@ describe('TreeNode class methods', () => {
     assert.strictEqual(node.getChild('c'), undefined);
   });
 
+  it('checks if node is a leaf', () => {
+    const node = new TrieNode(null, 'a', 42);
+    assert.strictEqual(node.isLeaf(), true);
+    node.addChild('b', 183);
+    assert.strictEqual(node.isLeaf(), false);
+  });
+
   it('it appends unique partial values per same keys instead of overwriting them', () => {
     const node = new TrieNode(null, 'a', 42);
     const childnode1 = node.addChild('b', 183);
