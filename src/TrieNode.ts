@@ -1,82 +1,105 @@
+interface TrieNodeValues<V> {
+  complete: V | undefined;
+  partial: V[];
+}
+
 export class TrieNode<V> {
   public key: string;
 
-  private w = new Set<V>();
+  public parent: TrieNode<V> | null;
 
-  private s = new Set<V>();
+  private children = new Map<string, TrieNode<V>>();
 
-  parent: TrieNode<V> | null;
+  private value: V | undefined = undefined;
 
-  children = new Map<string, TrieNode<V>>();
+  private partial = new Set<V>();
 
   constructor(
     parent: TrieNode<V> | null,
     key: string,
     value: V,
-    isLastIndex = false,
+    complete = false,
   ) {
     if (key.length !== 1) {
       throw new TypeError('Key of TrieNode must be a single character');
     }
     this.parent = parent;
     this.key = key;
-    this.addValue(value, isLastIndex);
+    this.addValue(value, complete);
   }
 
-  getChildNode(key: string) {
-    return this.children.get(key);
+  isLeaf() {
+    return !this.children.size;
   }
 
-  addChildNode(key: string, value: V, isLastIndex = false) {
-    const childnode = this.getChildNode(key);
+  isEmpty() {
+    this.value === undefined && !this.partial.size;
+  }
+
+  size() {
+    return this.children.size;
+  }
+
+  clear() {
+    this.children.clear();
+  }
+
+  addChild(key: string, value: V, isLastIndex = false) {
+    let childnode = this.getChild(key);
     if (!childnode) {
-      this.children.set(key, new TrieNode(this, key, value, isLastIndex));
+      childnode = new TrieNode(this, key, value, isLastIndex);
+      this.children.set(key, childnode);
     } else {
       childnode.addValue(value, isLastIndex);
     }
-    return this;
+    return childnode;
   }
 
-  addValue(value: V, isLastIndex = false) {
-    if (isLastIndex) {
-      this.w.add(value);
-    } else {
-      this.s.add(value);
-    }
+  getChild(key: string) {
+    return this.children.get(key);
   }
 
   hasChild(key: string) {
     return this.children.has(key);
   }
 
+  isComplete() {
+    return this.value !== undefined;
+  }
+
+  addValue(value: V, complete = false) {
+    if (complete) {
+      this.value = value;
+    } else {
+      this.partial.add(value);
+    }
+    return this;
+  }
+
+  getCompleteValue() {
+    return this.value;
+  }
+
   keys() {
     return Array.from(this.children.keys());
   }
 
-  values() {
-    const values = [];
-    if (this.w.size) {
-      values.push(...this.w);
-    }
-    if (this.s.size) {
-      values.push(...this.s);
-    }
-    return values;
+  values(): TrieNodeValues<V> {
+    return {
+      complete: this.value,
+      partial: Array.from(this.partial),
+    };
   }
 
-  isLastIndex() {
-    return !!this.w.size;
+  deleteNode(key: string) {
+    return this.children.delete(key);
   }
 
-  deleteSubstringValue(value: V) {
-    return this.s.delete(value);
+  deleteValue() {
+    this.value = undefined;
   }
 
-  getWordValues() {
-    return Array.from(this.w);
-  }
-
-  clearWordValues() {
-    return this.w.clear();
+  deletePartialValue(value: V) {
+    return this.partial.delete(value);
   }
 }

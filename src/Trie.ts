@@ -1,59 +1,51 @@
-import { WORDS_MATCH_RE } from './utils/trie.js';
 import { TrieNode } from './TrieNode.js';
 
 const ROOT_KEY = '*';
 
 export class Trie<V> {
-  root = new TrieNode(null, ROOT_KEY, undefined as V);
+  root = new TrieNode(null, ROOT_KEY, undefined as V, true);
 
-  static split(words: string) {
-    return words.match(WORDS_MATCH_RE) ?? [];
-  }
-
-  add(word: string, value: V) {
+  add(string: string, value?: V) {
     let node = this.root;
-    for (let i = 0; i < word.length; i++) {
-      const key = word[i]!;
-      const isLastIndex = i === word.length - 1;
-      node.addChildNode(key, value, isLastIndex);
-      node = node.getChildNode(key)!;
+    const _value = arguments.length > 1 ? value : string;
+    for (let i = 0; i < string.length; i++) {
+      const key = string[i]!;
+      const isLastIndex = i === string.length - 1;
+      node = node.addChild(key, _value as V, isLastIndex);
     }
     return this;
   }
 
-  addMany(words: string, value: V) {
-    Trie.split(words).forEach(word => {
-      this.add(word, value);
+  addMany(strings: string[], value?: V) {
+    strings.forEach(string => {
+      this.add(string, value);
     });
     return this;
   }
 
-  getLastNode(word: string) {
+  getLastNode(substring: string) {
     let node = this.root;
-    for (const key of word) {
+    for (const key of substring) {
       if (!node.hasChild(key)) return null;
-      node = node.getChildNode(key)!;
+      node = node.getChild(key)!;
     }
     return node;
   }
 
-  delete(word: string) {
-    let node = this.getLastNode(word);
-    if (!node || !node.isLastIndex()) return false;
-    const values = node.getWordValues();
-    node.clearWordValues();
+  delete(string: string) {
+    let node = this.getLastNode(string);
+    if (!node || !node.isComplete()) return false;
+    node.deleteValue();
     while (node.parent) {
-      // eslint-disable-next-line no-loop-func
-      values.forEach(value => {
-        node!.parent!.deleteSubstringValue(value);
-      });
+      if (!node.isLeaf()) return true;
+      node.parent.deleteNode(node.key);
       node = node.parent;
     }
     return true;
   }
 
   clear() {
-    this.root.children.clear();
+    this.root.clear();
   }
 
   next(substring: string) {
@@ -62,11 +54,15 @@ export class Trie<V> {
     return node.keys();
   }
 
-  includes(word: string) {
-    return this.getLastNode(word)?.isLastIndex();
+  includes(substring: string) {
+    return !!this.getLastNode(substring);
+  }
+
+  has(string: string) {
+    return !!this.getLastNode(string)?.isComplete();
   }
 
   getValues(substring: string) {
-    return this.getLastNode(substring)?.values() ?? [];
+    return this.getLastNode(substring)?.values() ?? null;
   }
 }
