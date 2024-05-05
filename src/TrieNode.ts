@@ -1,4 +1,4 @@
-interface TrieNodeValues<V> {
+export interface TrieNodeValues<V> {
   complete: V | undefined;
   partial: V[];
 }
