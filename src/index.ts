@@ -9,3 +9,5 @@ export * from './LinkedNode.js';
 export * from './PriorityQueue.js';
 export * from './Queue.js';
 export * from './Stack.js';
+export * from './Trie.js';
+export * from './TrieNode.js';
