@@ -3,7 +3,7 @@ import { TrieNode } from './TrieNode.js';
 const ROOT_KEY = '*';
 
 export class Trie<V> {
-  root = new TrieNode(null, ROOT_KEY, undefined as V, true);
+  root = new TrieNode(null, ROOT_KEY, null as V, true);
 
   add(string: string, value?: V) {
     let node = this.root;

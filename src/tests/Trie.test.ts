@@ -7,7 +7,7 @@ describe('Trie class initialization', () => {
     const trie = new Trie();
     assert.strictEqual(trie.root.key, '*');
     assert.deepStrictEqual(trie.root.values(), {
-      complete: undefined,
+      complete: [null],
       partial: [],
     });
   });
@@ -89,7 +89,7 @@ describe('Trie class methods', () => {
 
     const r1 = trie.getValues('four');
     const r2 = trie.getValues('foul');
-    assert.strictEqual(r1?.complete, 4);
+    assert.deepStrictEqual(r1?.complete, [4]);
     assert.deepStrictEqual(r1?.partial, [14, 40]);
     assert.strictEqual(r2, null);
   });
@@ -100,6 +100,12 @@ describe('Trie class methods', () => {
 
     const r1 = trie.getValues('fo');
     const r2 = trie.getValues('four');
-    assert.strictEqual(r1?.partial[0], r2?.complete);
+    assert.strictEqual(r1?.partial[0], r2?.complete[0]);
+  });
+
+  it('allows to add multiple values for the same key', () => {
+    const trie = new Trie<number>();
+    trie.add('four', 4).add('four', 44).add('four', 444);
+    assert.deepStrictEqual(trie.getValues('four')?.complete, [4, 44, 444]);
   });
 });

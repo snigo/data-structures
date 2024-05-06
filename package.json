@@ -1,6 +1,6 @@
 {
   "name": "@gigwork/ds",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Basic Data Structures in TypeScript",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
