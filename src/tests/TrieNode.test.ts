@@ -19,7 +19,7 @@ describe('TreeNode class initialization', () => {
   it('creates and checks the last index node', () => {
     const node = new TrieNode(null, 'a', 42, true);
     assert.strictEqual(node.isComplete(), true);
-    assert.deepStrictEqual(node.getCompleteValue(), 42);
+    assert.deepStrictEqual(node.getCompleteValues(), [42]);
   });
 });
 
@@ -56,10 +56,10 @@ describe('TreeNode class methods', () => {
     const childnode = node.addChild('b', 183);
     node.addChild('b', 183, true);
     assert.deepStrictEqual(childnode.values(), {
-      complete: 183,
+      complete: [183],
       partial: [183],
     });
-    assert.deepStrictEqual(childnode.getCompleteValue(), 183);
+    assert.deepStrictEqual(childnode.getCompleteValues(), [183]);
     assert.strictEqual(childnode.isComplete(), true);
   });
 
@@ -85,7 +85,7 @@ describe('TreeNode class methods', () => {
     assert.strictEqual(node.isComplete(), false);
     node.addValue(68, true);
     assert.deepStrictEqual(node.values(), {
-      complete: 68,
+      complete: [68],
       partial: [42, 183],
     });
     assert.strictEqual(node.isComplete(), true);
@@ -100,11 +100,11 @@ describe('TreeNode class methods', () => {
     assert.strictEqual(r1, true);
     assert.strictEqual(r2, false);
     assert.deepStrictEqual(node.values().partial, [183]);
-    assert.deepStrictEqual(node.values().complete, 68);
-    assert.deepStrictEqual(node.getCompleteValue(), 68);
+    assert.deepStrictEqual(node.values().complete, [68]);
+    assert.deepStrictEqual(node.getCompleteValues(), [68]);
     node.deleteValue();
     assert.deepStrictEqual(node.values().partial, [183]);
-    assert.deepStrictEqual(node.values().complete, undefined);
-    assert.deepStrictEqual(node.getCompleteValue(), undefined);
+    assert.deepStrictEqual(node.values().complete, []);
+    assert.deepStrictEqual(node.getCompleteValues(), []);
   });
 });

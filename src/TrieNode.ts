@@ -1,5 +1,5 @@
 export interface TrieNodeValues<V> {
-  complete: V | undefined;
+  complete: V[];
   partial: V[];
 }
 
@@ -10,7 +10,7 @@ export class TrieNode<V> {
 
   private children = new Map<string, TrieNode<V>>();
 
-  private value: V | undefined = undefined;
+  private complete = new Set<V>();
 
   private partial = new Set<V>();
 
@@ -33,7 +33,7 @@ export class TrieNode<V> {
   }
 
   isEmpty() {
-    this.value === undefined && !this.partial.size;
+    !this.complete.size && !this.partial.size;
   }
 
   size() {
@@ -64,20 +64,20 @@ export class TrieNode<V> {
   }
 
   isComplete() {
-    return this.value !== undefined;
+    return !!this.complete.size;
   }
 
   addValue(value: V, complete = false) {
     if (complete) {
-      this.value = value;
+      this.complete.add(value);
     } else {
       this.partial.add(value);
     }
     return this;
   }
 
-  getCompleteValue() {
-    return this.value;
+  getCompleteValues() {
+    return Array.from(this.complete);
   }
 
   keys() {
@@ -86,7 +86,7 @@ export class TrieNode<V> {
 
   values(): TrieNodeValues<V> {
     return {
-      complete: this.value,
+      complete: this.getCompleteValues(),
       partial: Array.from(this.partial),
     };
   }
@@ -96,7 +96,7 @@ export class TrieNode<V> {
   }
 
   deleteValue() {
-    this.value = undefined;
+    this.complete.clear();
   }
 
   deletePartialValue(value: V) {
